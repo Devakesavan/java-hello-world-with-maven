@@ -1,0 +1,16 @@
+trigger:
+  - main  # or master, depending on your branch name
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'clean install'
+      options: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'   # Change if you're using a different Java version
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
